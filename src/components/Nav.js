@@ -13,7 +13,7 @@ export default class Nav extends Component {
       { name: 'Log In', link: '/login' }
     ]
     return (
-      <Menu fixed="top" borderless>
+      <Menu borderless attached stackable>
         <Menu.Item as={Link} to='/' header fitted='vertically'>
           <Image src={Logo} height='48px' />
           PNP Crime Overwatch
