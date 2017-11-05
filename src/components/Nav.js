@@ -1,26 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Image } from 'semantic-ui-react'
+import Logo from '../images/logo.svg'
 
-function Nav() {
-  return (
-    <ul className='nav'>
-      <li>
-        <NavLink exact activeClassName='active' to='/'>
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName='active' to='/battle'>
-          Battle
-        </NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName='active' to='/popular'>
-          Popular
-        </NavLink>
-      </li>
-    </ul>
-  )
+export default class Nav extends Component {
+  render() {
+    const navbar_items = [
+      { name: 'Stats', link: '/stats' },
+      { name: 'Precincts', link: '/precincts'},
+      { name: 'Featured Crimes', link: '/featured-crimes' },
+      { name: 'Most Wanted', link: '/most-wanted' },
+      { name: 'Log In', link: '/login' }
+    ]
+    return (
+      <Menu fixed="top" borderless>
+        <Menu.Item as={Link} to='/' header fitted='vertically'>
+          <Image src={Logo} height='48px' />
+          PNP Crime Overwatch
+        </Menu.Item>
+        {navbar_items.map((item) =>
+          <Menu.Item as={Link} to={item.link} name={item.name} key={item.name}>
+          </Menu.Item>
+        )}
+      </Menu>
+    )
+  }
 }
-
-export default Nav;

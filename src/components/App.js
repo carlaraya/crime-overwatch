@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import ReactRouter, { HashRouter, Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import Nav from './Nav.js'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <HashRouter>
@@ -10,9 +10,11 @@ class App extends Component {
           <Nav />
           <Switch>
             <Route exact path='/' component={function(){return null;}} />
-            <Route exact path='/battle' component={function(){return null;}} />
-            <Route path='/battle/results' component={function(){return null;}} />
-            <Route path='/popular' component={function(){return null;}} />
+            <Route exact path='/stats' component={function(){return null;}} />
+            <Route path='/precincts' component={function(){return null;}} />
+            <Route path='/featured-crimes' component={function(){return null;}} />
+            <Route path='/most-wanted' component={function(){return null;}} />
+            <Route path='/login' component={function(){return null;}} />
             <Route render={function() {
               return <p>Not Found</p>
             }} />
@@ -22,5 +24,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
