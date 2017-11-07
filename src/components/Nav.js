@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Image } from 'semantic-ui-react'
-import Logo from '../images/logo.svg'
+import Logo from '../images/logo.png'
 
 export default class Nav extends Component {
   render() {
@@ -15,7 +15,7 @@ export default class Nav extends Component {
     return (
       <Menu borderless attached stackable>
         <Menu.Item as={Link} to='/' header fitted='vertically'>
-          <Image src={Logo} height='48px' />
+          <Image src={Logo} size='mini' />
           PNP Crime Overwatch
         </Menu.Item>
         {navbar_items.map((item) =>
