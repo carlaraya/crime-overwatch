@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Header } from 'semantic-ui-react'
 
-export default class Nav extends Component {
+export default class Login extends Component {
   render() {
     return (
-      <Header as='h1'>
-        Log In
-      </Header>
+      <div>
+        <Header as='h1'>
+          Log In
+        </Header>
+      </div>
     )
   }
 }

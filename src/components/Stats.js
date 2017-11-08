@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Header } from 'semantic-ui-react'
 
-export default class Nav extends Component {
+export default class Stats extends Component {
   render() {
     return (
-      <Header as='h1'>
-        Stats
-      </Header>
+      <div>
+        <Header as='h1'>
+          Stats
+        </Header>
+      </div>
     )
   }
 }
