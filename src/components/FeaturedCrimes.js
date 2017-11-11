@@ -1,39 +1,6 @@
 import React, { Component } from 'react'
-import { Header, Grid } from 'semantic-ui-react'
+import { Header, Divider } from 'semantic-ui-react'
 import FeaturedInfo from './FeaturedInfo.js'
-
-const ncols = 2;
-
-function splitIntoPairs(arr) {
-  return arr.reduce((result, val, i) => {
-    if (i % ncols === 0) result.push(arr.slice(i, i + ncols))
-    return result
-  }, [])
-}
-
-function createGridCols(articleGroup) {
-  return articleGroup.map((article, j) => {
-    return (
-      <Grid.Column key={j}>
-        <FeaturedInfo article={article} />
-      </Grid.Column>
-    )
-  })
-}
-
-function createGrid(articleGroups) {
-  return (
-    <Grid stackable>
-      {articleGroups.map((articleGroup, i) => {
-        return (
-          <Grid.Row columns={ncols} key={i}>
-            {createGridCols(articleGroup)}
-          </Grid.Row>
-        )
-      })}
-    </Grid>
-  )
-}
 
 export default class FeaturedCrimes extends Component {
   render() {
@@ -79,7 +46,15 @@ export default class FeaturedCrimes extends Component {
         <Header as='h1'>
           Featured Crimes
         </Header>
-        {createGrid(splitIntoPairs(articles))}
+        <Divider hidden/>
+        {articles.map((article, i) => {
+          return (
+            <div>
+              <FeaturedInfo article={article} fullview/>
+              <Divider />
+            </div>
+          )
+        })}
       </div>
     )
   }
