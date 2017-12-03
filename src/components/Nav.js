@@ -7,7 +7,7 @@ export default class Nav extends Component {
   render() {
     const navbar_items = [
       { name: 'Stats', link: '/stats' },
-      { name: 'Precincts', link: '/precincts'},
+      { name: 'Police Stations', link: '/police-stations'},
       { name: 'Featured Crimes', link: '/featured-crimes' },
       { name: 'Most Wanted', link: '/most-wanted' },
       { name: 'Log In', link: '/login' }

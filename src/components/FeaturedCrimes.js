@@ -1,10 +1,31 @@
 import React, { Component } from 'react'
 import { Header, Divider } from 'semantic-ui-react'
 import FeaturedInfo from './FeaturedInfo.js'
+import api from '../api.js'
 
 export default class FeaturedCrimes extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      articles: null
+    }
+    this.getArticles = this.getArticles.bind(this)
+  }
+
+  componentDidMount() {
+    this.getArticles()
+  }
+
+  getArticles() {
+    api.getFeaturedCrimes().then(function(data) {
+      this.setState(function() {
+        return { articles: data }
+      })
+    }.bind(this))
+  }
+
   render() {
-    const articles = [
+    /*const articles = [
       {
         title: "Lorem ipsum",
         precinct: "Cainta Police Department",
@@ -40,21 +61,24 @@ export default class FeaturedCrimes extends Component {
         date_posted: "Jan 1, 2017 4:00:02am",
         content: " Nullam sem leo, porttitor et erat ut, bibendum condimentum nisi. Cras condimentum varius massa, eget pharetra ipsum laoreet et. Morbi nec orci a neque iaculis euismod id nec orci. Donec nunc dolor, rutrum vitae ullamcorper non, malesuada sed ligula. Fusce nec nulla dolor. Aenean eu convallis leo. Sed ullamcorper porttitor odio non efficitur. Pellentesque hendrerit libero sit amet porta rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat mauris id erat dictum fermentum. Ut tincidunt orci gravida lacus efficitur dapibus. Nunc maximus nisi mi, in dapibus magna tristique sit amet. "
       }
-    ]
+    ]*/
     return (
       <div>
         <Header as='h1'>
           Featured Crimes
         </Header>
         <Divider hidden/>
-        {articles.map((article, i) => {
-          return (
-            <div>
-              <FeaturedInfo article={article} fullview/>
-              <Divider />
-            </div>
-          )
-        })}
+        {this.state.articles
+          ? this.state.articles.map((article, i) => {
+              return (
+                <div key={article.id}>
+                  <FeaturedInfo article={article} fullview/>
+                  <Divider />
+                </div>
+              )
+            })
+          : <Header as='h3'>Loading...</Header>
+        }
       </div>
     )
   }
