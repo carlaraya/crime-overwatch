@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
 
 function formatDate(dateStr) {
@@ -17,7 +18,7 @@ export default class FeaturedInfo extends Component {
           <i>
           Posted {formatDate(article.created_at)}
           <br />
-          by <a href='https://google.com'>{article.police_station.name}</a>
+          by <Link to={'/police-stations/' + article.police_station_id}>{article.police_station.name}</Link>
           <br />
           crime type: {article.crime_type_id}
           </i>

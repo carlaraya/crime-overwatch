@@ -8,6 +8,7 @@ import PoliceStations from './PoliceStations.js'
 import FeaturedCrimes from './FeaturedCrimes.js'
 import MostWanted from './MostWanted.js'
 import Login from './Login.js'
+import PoliceStation from './PoliceStation.js'
 
 export default class App extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/stats' component={Stats} />
+              <Route path="/police-stations/:id" component={PoliceStation}/>
               <Route path='/police-stations' component={PoliceStations} />
               <Route path='/featured-crimes' component={FeaturedCrimes} />
               <Route path='/most-wanted' component={MostWanted} />
