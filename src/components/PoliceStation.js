@@ -22,9 +22,11 @@ export default class PoliceStation extends Component {
       this.setState(function() {
         data.featured_crimes.map(function(featured_crime) {
           featured_crime.police_station = { name: data.name }
+          return null
         })
         data.most_wanteds.map(function(most_wanted) {
           most_wanted.police_stations = [{ id: data.id, name: data.name }]
+          return null
         })
         return { policeStation: data }
       })
@@ -43,13 +45,13 @@ export default class PoliceStation extends Component {
           </p>
           <p>Lat: {policeStation.lat}, Long: {policeStation.lng}</p>
           <Divider hidden/>
-          <Grid divided>
+          <Grid divided={false}>
             <Grid.Row columns={2}>
               <Grid.Column>
-                <FeaturedCrimes data={policeStation.featured_crimes}/>
+                <FeaturedCrimes policeStationId={this.props.match.params.id} data={policeStation.featured_crimes}/>
               </Grid.Column>
               <Grid.Column>
-                <MostWanted data={policeStation.most_wanteds}/>
+                <MostWanted policeStationId={this.props.match.params.id} data={policeStation.most_wanteds}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>

@@ -1,8 +1,31 @@
 import $ from 'jquery';
 
 export default {
-  //url: 'https://crime-overwatch-api.herokuapp.com',
-  url: 'http://192.168.99.100:3000',
+  url: 'https://crime-overwatch-api.herokuapp.com',
+  //url: 'http://192.168.99.100:3000',
+  auth: '',
+  username: '',
+
+  login: function(username, password) {
+    return $.ajax({
+      url: this.url + '/authenticate',
+      method: 'POST',
+      data: {
+        username: username,
+        password: password
+      }
+    }).done(function(data) {
+      this.username = username
+      this.id = data.id
+      this.auth = data.auth_token
+      return data.auth_token
+    }.bind(this))
+  },
+
+  logout: function() {
+    this.auth = ''
+    this.username = ''
+  },
 
   getFeaturedCrimes: function() {
     return $.ajax({
