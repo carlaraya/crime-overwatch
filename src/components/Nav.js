@@ -9,7 +9,7 @@ export default class Nav extends Component {
 
     const navbar_items = [
       { name: 'Logged in as ' + api.username, link: '/police-stations/' + api.id, auth: true },
-      { name: 'Stats', link: '/stats' },
+      //{ name: 'Stats', link: '/stats' },
       { name: 'Police Stations', link: '/police-stations'},
       { name: 'Featured Crimes', link: '/featured-crimes' },
       { name: 'Most Wanted', link: '/most-wanted' },
@@ -24,7 +24,7 @@ export default class Nav extends Component {
         </Menu.Item>
         {navbar_items.map((item) => {
           if (item.auth === undefined || (item.auth === true && api.auth) || (item.auth === false && !api.auth)) {
-            return <Menu.Item as={Link} to={item.link} name={item.name} key={item.name} />
+            return <Menu.Item as={Link} to={item.link}  key={item.name} >{item.name}</Menu.Item>
           } else {
             return null
           }

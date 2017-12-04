@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { Header, Divider } from 'semantic-ui-react'
+import { Header, Divider, Button } from 'semantic-ui-react'
 import FeaturedInfo from './FeaturedInfo.js'
+import FeaturedCrimeForm from './FeaturedCrimeForm.js'
 import api from '../api.js'
 
 export default class FeaturedCrimes extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      articles: null
+      articles: [],
+      isCreating: false
     }
     this.getArticles = this.getArticles.bind(this)
   }
@@ -15,6 +17,10 @@ export default class FeaturedCrimes extends Component {
   componentDidMount() {
     this.getArticles()
   }
+
+  closeForm = function() {
+    this.setState({ isCreating: false })
+  }.bind(this)
 
   getArticles() {
     if (this.props.data) {
@@ -30,19 +36,33 @@ export default class FeaturedCrimes extends Component {
     }
   }
 
+  isMine() {
+    return api.id.toString() === this.props.policeStationId
+  }
+
+
   render() {
+    var articles = this.state.articles
+    articles.reverse()
     return (
       <div>
         <Header as='h1'>
           Featured Crimes
         </Header>
+        { this.isMine()
+          ? (this.state.isCreating
+            ? <FeaturedCrimeForm onSubmit={this.closeForm} article={{}} />
+            : <Button fluid onClick={() => {this.setState({isCreating: true})}}>Add Featured Crime</Button>)
+            : null
+        }
         <Divider hidden/>
-        {this.state.articles
-          ? this.state.articles.map((article, i) => {
+        {articles
+          ? articles.map((article, i) => {
               return (
                 <div key={article.id}>
                   <FeaturedInfo article={article} />
-                  <Divider />
+                  
+                  <Divider hidden/>
                 </div>
               )
             })

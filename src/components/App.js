@@ -32,6 +32,11 @@ function logOutRender(nextState, replace) {
 }
 
 export default class App extends Component {
+  constructor (props) {
+    super(props)
+    api.getCrimeTypes()
+  }
+
   render() {
     return (
       <HashRouter>

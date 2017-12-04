@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
+import api from '../api.js'
 
 export default class MostWantedInfo extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class MostWantedInfo extends Component {
         </p>
         <p>
           <i>
-          Crime Type: {mw.crime_type_id}
+          Crime Type: {api.crimeTypes[mw.crime_type_id-1]}
           <br />
           Exact Crime: {mw.exact_crime}
           <br />

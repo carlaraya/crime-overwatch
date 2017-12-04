@@ -5,6 +5,8 @@ export default {
   //url: 'http://192.168.99.100:3000',
   auth: '',
   username: '',
+  id: 0,
+  crimeTypes: ["Murder","Homicide","Physical Injury","Rape","Robbery","Theft","Carnapping","Cattle Rustling"],
 
   login: function(username, password) {
     return $.ajax({
@@ -25,6 +27,7 @@ export default {
   logout: function() {
     this.auth = ''
     this.username = ''
+    this.id = 0
   },
 
   getFeaturedCrimes: function() {
@@ -34,6 +37,39 @@ export default {
     }).done(function(data) {
       return data;
     })
+  },
+
+  updateFeaturedCrime: function(article, id) {
+    return $.ajax({
+      url: this.url + '/featured_crimes/' + id,
+      method: 'PATCH',
+      data: article,
+      headers: {Authorization: this.auth}
+    }).done(function(data) {
+      return data;
+    })
+  },
+
+  createFeaturedCrime: function(article) {
+    article.police_station_id = this.id
+    return $.ajax({
+      url: this.url + '/featured_crimes',
+      method: 'POST',
+      data: article,
+      headers: {Authorization: this.auth}
+    }).done(function(data) {
+      return data;
+    })
+  },
+
+  deleteFeaturedCrime: (id) => {
+    return $.ajax({
+      url: 'https://crime-overwatch-api.herokuapp.com/featured_crimes/' + id,
+      method: 'DELETE',
+      headers: {Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJwb2xpY2Vfc3RhdGlvbl9pZCI6MSwiZXhwIjoxNTEyNDg4NjI4fQ.cLx5Re6JVdNM5MCk7fLhVoSelC6PK_xFmGseTCHlBUY'}
+    }).done(function(data) {
+      return data;
+    }.bind(this))
   },
 
   getPoliceStations: function() {
@@ -62,4 +98,14 @@ export default {
       return data;
     })
   },
+
+  getCrimeTypes: function() {
+    return $.ajax({
+      url: this.url + '/crime_types',
+      method: 'GET'
+    }).done(function(data) {
+      this.crimeTypes = data.map(x => x.name)
+      return data
+    })
+  }
 }
