@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Header, Form, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import api from '../api.js'
+import MostWantedForm from './MostWantedForm.js'
 
 export default class Login extends Component {
   state = {

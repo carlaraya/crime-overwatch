@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import { Header, Form } from 'semantic-ui-react'
 import api from '../api.js'
 
-export default class FeaturedCrimeForm extends Component {
+export default class MostWantedForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      title: '',
+      name: '',
       crime_type_id: null,
-      content: ''
+      exact_crime: '',
+      reward: '',
+      additional_info: ''
     }
   }
 
@@ -17,31 +19,33 @@ export default class FeaturedCrimeForm extends Component {
     else this.setState({ crime_type_id: value })
   }
   handleSubmit = () => {
-    if (this.props.article.title) {
-      api.updateFeaturedCrime(this.state, this.props.article.id).done(x => {this.setState(x); this.props.onSubmit(x)})
+    if (this.props.mw.name) {
+      api.updateMostWanted(this.state, this.props.mw.id).done(x => {this.setState(x); this.props.onSubmit(x)})
     } else {
-      api.createFeaturedCrime(this.state).done(x => {this.props.onSubmit(x)})
+      api.createMostWanted(this.state).done(x => {this.props.onSubmit(x)})
     }
     
   }
 
   componentDidMount() {
-    this.setState(this.props.article)
+    this.setState(this.props.mw)
   }
 
   render() {
     const options = api.crimeTypes.map((x, i) => {
       return { key: i+1, text: x, value: i+1 }
     })
-    const article = this.props.article
+    const mw = this.props.mw
     return (
       <Form onSubmit={this.handleSubmit}>
         {/*<Header size='small'>Featured Crime Form</Header>*/}
         <Form.Group widths='equal'>
-          <Form.Input placeholder='Title' name='title' value={this.state.title} onChange={this.handleChange} />
+          <Form.Input placeholder='Name' name='name' value={this.state.name} onChange={this.handleChange} />
           <Form.Select options={options} placeholder='Crime Type' value={this.state.crime_type_id} onChange={this.handleChange} />
         </Form.Group>
-        <Form.TextArea placeholder='Content' name='content' value={this.state.content} onChange={this.handleChange}/>
+        <Form.Input placeholder='Exact Crime' name='exact_crime' value={this.state.exact_crime} onChange={this.handleChange} />
+        <Form.Input placeholder='Reward' name='reward' value={this.state.reward} onChange={this.handleChange} />
+        <Form.TextArea placeholder='Additional Info' name='additional_info' value={this.state.additional_info} onChange={this.handleChange}/>
         <Form.Button>Submit</Form.Button>
       </Form>
     )

@@ -18,8 +18,11 @@ export default class FeaturedCrimes extends Component {
     this.getArticles()
   }
 
-  closeForm = function() {
+  closeForm = function(article) {
+    var newarticle = JSON.parse(JSON.stringify(article))
+    this.state.articles.unshift(newarticle)
     this.setState({ isCreating: false })
+
   }.bind(this)
 
   getArticles() {
@@ -63,7 +66,7 @@ export default class FeaturedCrimes extends Component {
                   <FeaturedInfo article={article} />
                   
                   <Divider hidden/>
-                </div>
+                </div>    
               )
             })
           : <Header as='h3'>Loading...</Header>

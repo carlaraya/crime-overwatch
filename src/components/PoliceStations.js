@@ -19,6 +19,7 @@ export default class PoliceStations extends Component {
   getPoliceStations() {
     api.getPoliceStations().then(function(data) {
       this.setState(function() {
+        data.sort((a, b) => a.id - b.id)
         return { policeStations: data }
       })
     }.bind(this))

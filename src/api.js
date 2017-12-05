@@ -99,6 +99,40 @@ export default {
     })
   },
 
+  updateMostWanted: function(mw, id) {
+    return $.ajax({
+      url: this.url + '/most_wanteds/' + id,
+      method: 'PATCH',
+      data: mw,
+      headers: {Authorization: this.auth}
+    }).done(function(data) {
+      return data;
+    })
+  },
+
+  createMostWanted: function(mw) {
+    return $.ajax({
+      url: this.url + '/most_wanteds',
+      method: 'POST',
+      data: mw,
+      headers: {Authorization: this.auth}
+    }).done(function(data) {
+      return data;
+    }.bind(this))
+  },
+
+
+  deleteMostWanted: (id) => {
+    return $.ajax({
+      url: 'https://crime-overwatch-api.herokuapp.com/most_wanteds/' + id,
+      method: 'DELETE',
+      headers: {Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJwb2xpY2Vfc3RhdGlvbl9pZCI6MSwiZXhwIjoxNTEyNDg4NjI4fQ.cLx5Re6JVdNM5MCk7fLhVoSelC6PK_xFmGseTCHlBUY'}
+    }).done(function(data) {
+      return data;
+    }.bind(this))
+  },
+
+
   getCrimeTypes: function() {
     return $.ajax({
       url: this.url + '/crime_types',

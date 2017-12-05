@@ -51,7 +51,7 @@ export default class PoliceStation extends Component {
                 <FeaturedCrimes policeStationId={this.props.match.params.id} data={policeStation.featured_crimes}/>
               </Grid.Column>
               <Grid.Column>
-                <MostWanted policeStationId={this.props.match.params.id} data={policeStation.most_wanteds}/>
+                <MostWanted policeStationId={this.props.match.params.id} policeStationName={policeStation.name} data={policeStation.most_wanteds}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>

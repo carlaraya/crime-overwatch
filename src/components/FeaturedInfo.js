@@ -19,7 +19,11 @@ export default class FeaturedInfo extends Component {
     }
   }
 
-  closeForm = function() {
+  closeForm = function(article) {
+    console.log(article)
+    this.props.article.title = article.title
+    this.props.article.crime_type_id = article.crime_type_id
+    this.props.article.content = article.content
     this.setState({ isEditing: false })
   }.bind(this)
 
@@ -27,6 +31,7 @@ export default class FeaturedInfo extends Component {
     console.log(api.id)
     console.log(this.props.article.police_station_id)
     return api.id === this.props.article.police_station_id
+
   }
 
   onDelete = () => {
